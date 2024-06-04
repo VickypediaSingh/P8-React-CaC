@@ -117,9 +117,10 @@ function Todos() {
   const todos = useSelector((state) => state.todos);
 
   const [isTodoEditable, setIsTodoEditable] = useState({});
-  // its a big object, for every todo clicked, it will store a its editable status,
-  // thats the reason why we will have to do todos.find to grab the right todo
+  // isTodoEditable is an object, for every todo clicked, it will store its editable status inside it as a key-value pair viz, {id:editableStatus} aese, so be careful , see line 180 ke aas paas , thats the reason why we will have to do todos.find to grab the right todo
+
   const [todoMsg, setTodoMsg] = useState({});
+  // todoMsg is an object, for every todo clicked, it will store its msg inside it as a key-value pair viz, {id:msg} aese, so be careful , see line 188 .
 
   const handleEditClick = (id) => {
     // Check if the todo item is currently in edit mode
@@ -140,8 +141,10 @@ function Todos() {
 
       // Update the todo message state with the current text, ie. after editing
       setTodoMsg({ ...todoMsg, [id]: todoText });
-    } else {
-      // If the todo item is being saved
+    }
+    // If the todo item is done editing
+    // If the todo item is being saved
+    else {
       // Dispatch an action to update the todo item with the new text
       dispatch(updateTodo({ id, text: todoMsg[id] }));
     }
