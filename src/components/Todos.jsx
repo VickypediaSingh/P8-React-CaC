@@ -117,16 +117,16 @@ function Todos() {
   const todos = useSelector((state) => state.todos);
 
   const [isTodoEditable, setIsTodoEditable] = useState({});
-  // isTodoEditable is an object, for every todo clicked, it will store its editable status inside it as a key-value pair viz, {id:editableStatus} aese, so be careful , see line 180 ke aas paas , thats the reason why we will have to do todos.find to grab the right todo
+  // isTodoEditable is an object, for every todo clicked, it will store its editable status inside it as a key-value pair viz, {id:editableStatus} aese, so be careful, thats the reason why we will have to do todos.find to grab the right todo in toggleComplete named reducer in todoSlice.
 
   const [todoMsg, setTodoMsg] = useState({});
-  // todoMsg is an object, for every todo clicked, it will store its msg inside it as a key-value pair viz, {id:msg} aese, so be careful , see line 188 .
+  // todoMsg is an object, for every todo clicked, it will store its msg inside it as a key-value pair viz, {id:msg} aese, so be careful , see line 188 + 2 .
 
   const handleEditClick = (id) => {
     // Check if the todo item is currently in edit mode
     const isCurrentlyEditable = isTodoEditable[id];
 
-    // Toggle the edit mode for the todo item which will be founud by [id]
+    // Toggle the edit mode for the todo item which will be found by [id]
     const updatedIsTodoEditable = {
       ...isTodoEditable,
       [id]: !isCurrentlyEditable,
@@ -136,6 +136,7 @@ function Todos() {
 
     // If the todo item is being made editable
     if (!isCurrentlyEditable) {
+      //ye upar vala variable hai, ye isTodoEditable object se nhi aata...CAREFUL
       // Retrieve the current text of the todo item, ie. msg before editing
       const todoText = todos.find((todo) => todo.id === id).text;
 
@@ -191,7 +192,12 @@ function Todos() {
               onChange={(e) =>
                 setTodoMsg({ ...todoMsg, [todo.id]: e.target.value })
               }
+              // value and onChange descripton, 1st see onChange
+              // onChange pe we saved it
+              // so if we change, the changed value is shown from todoMsg object as it gets added in this object
+              // if not changed, it shows value from todos arr (todo.text) as its an 'OR' but pehle from todoMsg
               readOnly={!isTodoEditable[todo.id]}
+              // by default, todos are not editable (isTodoEditable) has no key-value pairs, implying all todos have a value of 'false' for edit mode). NHI HAI MEANS FALSE.
             />
             <button
               className={`ml-3 inline-flex w-8 h-8 rounded-lg text-sm justify-center items-center transition duration-300 ${

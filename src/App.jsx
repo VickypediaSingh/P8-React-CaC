@@ -4,8 +4,17 @@ import AddTodo from "./components/AddTodo";
 import Todos from "./components/Todos";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // useEffect(() => {
+  //   const todos = JSON.parse(localStorage.getItem("todos"));
 
+  //   if (todos && todos.length > 0) {
+  //     setTodos(todos);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
   return (
     <>
       <h1>toDo App in Redux</h1>
